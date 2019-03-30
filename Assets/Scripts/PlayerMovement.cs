@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController2D controller;
     public float runSpeed = 40f;
     public Animator animator;
+    public FixedJoystick joystick;
 
     float horizontalMove = 0f;
     bool jump = false;
@@ -16,13 +17,15 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        joystick.AxisOptions = AxisOptions.Horizontal;
     }
 
     // Update is called once per frame
     void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+
+        // horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        horizontalMove = joystick.Horizontal * runSpeed;
         // Speed is the name of the parameter in the animator object
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove)) ;
 
